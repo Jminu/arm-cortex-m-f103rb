@@ -1,0 +1,41 @@
+# STM32CubeIDE 빌드 산출물
+/Debug/
+/Release/
+/build/
+/*.elf
+/*.hex
+/*.bin
+/*.map
+/*.lst
+/*.d
+/*.o
+
+# STM32CubeIDE 프로젝트 설정 파일
+/.settings/
+/.cproject
+.project
+.loadpath
+.mxproject
+.tm_project.xml
+Makefile
+*.launch
+
+# CubeMX 생성 중 생기는 백업
+*_backup.ioc
+*Backup*/**
+
+# Eclipse 관련
+.metadata/
+*.swp
+
+# macOS 시스템 파일
+.DS_Store
+
+# Windows 시스템 파일
+Thumbs.db
+Desktop.ini
+
+# 기타 IDE 관련
+*.log
+*.tmp
+
