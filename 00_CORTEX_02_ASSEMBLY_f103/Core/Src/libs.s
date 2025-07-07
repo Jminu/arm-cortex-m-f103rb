@@ -108,12 +108,8 @@ max2:
 	movlt r0,r1
 	bx lr
 
-	 /*
-	 	int clear_unused(int v, int bitnum)
-	 	------------------------
-	 	r0=v(0xffffffff), r1=bitnum(0)
-	 	The return value is result (r0)
-		*/
+
+
 	.global  clear_unused
 clear_unused:
 	mov r2,#1 @r2에 숫자 1저장
@@ -136,17 +132,17 @@ clears_unused:
 
 
 	.global  sum
-sum:
-	@ IMPLEMENT HERE
-	@ use MOV, ADD, CMP and B instruction: under 10 lines
-	mov r2,#0 @sum(r2)
+sum: @ r0 = start, r1 = end
+	mov r2, #0 @ r2는 sum, 초기화
 loop1:
-	add r2,r0
-	add r0,#1
-	cmp r1,r0
-	bge loop1
-	mov r0,r2 @return value
-	bx lr	 @ return
+	add r2, r0
+	add r0, #1
+	cmp r1, r0 @ start와 end를 비교
+	bge loop1 @ r2가 r1보다 크면
+	mov r0, r2
+	bx lr
+
+
 
 	 /*
 	 	void MEMCPY_SINGLE(unsigned long dst, unsigned long src, int size)

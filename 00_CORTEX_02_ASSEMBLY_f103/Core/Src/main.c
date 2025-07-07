@@ -183,7 +183,7 @@ int main(void)
 	}
 #endif
 
-#if 1
+#if 0
 	{
 		/* actual initialization */
 		volatile unsigned result1;
@@ -206,7 +206,7 @@ int main(void)
 	}
 #endif
 
-#if 0
+#if 1
 	/* Sum from 1 to 100 */
 {
 	int start=1, end=100;
