@@ -58,15 +58,38 @@ max:
 	@ returning the max between two numbers
 	@ use MOV, CMP and B instruction
 @ before N=0, Z=0, C=0, V=1
-	cmp r0,r1	@ r0(100)-r1(34)= N,Z,C,V,Q
-@ after N=0, Z=0, C=1, V=0
-	bge 1f
-	blt 2f
-1:
-	@mov r0,r0
+	cmp r0,r1	@ r0(34)-r1(100)= N,Z,C,V,Q, @ r0이 기준이다!
+@ after N=1, Z=0, C=0, V=0
+	bge 1f @ goto label 1
+	blt 2f @ goto label 2
+1: @pipeline stall
+	mov r0,r0 @ 생략가능
 	bx lr
 2:
-	mov r0,r1
+	mov r0,r1 @ r1이 더 크다면, AAPCS규칙에 따라, r0으로 옮겨줘야 r1을 반환가능
+	bx lr
+
+
+	.global max_prac
+max_prac:
+	cmp r0,r1 @ compare with r0, r1 based on r0
+
+	bge 1f @ greator equal
+	blt 2f @ less than
+1: @ r0가 더 클때
+	mov r0, r0
+	bx lr
+2: @ r1가 더 클때
+	mov r0, r1 @ r0이 반환 레지스터이기 때문에 결과를 r0에 저장
+	bx lr @ 복귀주소로 복귀
+
+
+	.global max2_prac
+max2_prac:
+	cmp r0, r1
+	ite ge
+	movge r0, r0
+	movlt r0, r1
 	bx lr
 
 	 /*

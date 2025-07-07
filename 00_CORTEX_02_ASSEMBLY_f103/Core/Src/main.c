@@ -165,7 +165,7 @@ int main(void)
 	}
 #endif
 
-#if 0
+#if 1
 	{
 		/* actual initialization */
 		volatile int result;
@@ -177,7 +177,7 @@ int main(void)
 
 		result = max(a, b);
 		printf("Max value is : %d (must 100)\n", result);
-		result = max2(b, a);
+		result = max2(a, b);
 		printf("Max2 value is : %d (must 100)\n", result);
 		__BKPT(0);
 	}
@@ -272,7 +272,7 @@ int main(void)
 }
 #endif
 
-#if 1
+#if 0
 {
 	int c=0x00000003;
 	int result;
@@ -282,7 +282,7 @@ int main(void)
 }
 #endif
 
-#if 1
+#if 0
 void xPSR_TEST(void);
 	xPSR_TEST();
 #endif
