@@ -116,34 +116,25 @@ max2:
 		*/
 	.global  clear_unused
 clear_unused:
-	@ IMPLEMENT HERE
-	@ returning v & ~(1<<bitnum);
-	@ use MOV, LSL and BIC instruction: under 5 lines
-	mov r2,#1
-	lsl r2,r1
-	bic r0,r2
+	mov r2,#1 @r2에 숫자 1저장
+	lsl r2, r1 @ logical shift left, r1만큼 왼쪽으로 민다
+	bic r0, r2 @ bit clean, r0에서 r2의 비트만 clear한다
 	bx lr
 
-	 /*
-	 	int clears_unused(int v, int pattern)
-	 	------------------------
-	 	r0=v(0xffffffff), r1=pattern(0)
-	 	The return value is result (r0)
-		*/
+
+
 	.global  clears_unused
 clears_unused:
-	@ IMPLEMENT HERE
-	@ returning v & ~(pattern);
-	@ use BIC instruction: under 5 lines
-	bic r0,r1
+	bic r0, r1 @ r1에 pattern이 온다
 	bx lr
+/*
+	clear_unused는 clear할 비트의 위치를 인자로 전달했고,
+	(그래서 1을 left shift해서 bit를 하는듯)
+	clears_unused는 그냥 바로 pattern에 해당 되는걸 clear한다
+*/
 
-	 /*
-	 	int sum(int start, int end)
-	 	------------------------
-			r0=start, r1=end
-			The return value is sum (r0)
-		*/
+
+
 	.global  sum
 sum:
 	@ IMPLEMENT HERE

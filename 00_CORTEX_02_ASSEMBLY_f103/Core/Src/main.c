@@ -165,7 +165,7 @@ int main(void)
 	}
 #endif
 
-#if 1
+#if 0
 	{
 		/* actual initialization */
 		volatile int result;
@@ -183,20 +183,25 @@ int main(void)
 	}
 #endif
 
-#if 0
+#if 1
 	{
 		/* actual initialization */
-		volatile unsigned result;
-		unsigned int a=0x12345678;
-		int bitnum=0;
-		int pattern=0xff; // 0b11000000
+		volatile unsigned result1;
+		volatile unsigned result2;
+
+		unsigned int a1=0xffffffff;
+		unsigned int a2;
+
+		int bitnum1 = 0;
+		int pattern = 0xc0; // 7번, 6번 비트 지움 binary=1100 0000
 
 		/* function returning a & ~(1<<bitnum) */
 		printf("ex4. bit clear(mask off)\n");
 
-		//result = clear_unused(a, bitnum);
-		result = clears_unused(a, pattern<<8);
-		printf("masked value is : 0x%08x (must 0x12340078)\n", result);
+		result1 = clear_unused(a1, bitnum1);
+		result2 = clears_unused(a2, pattern);
+		printf("masked value is : 0x%08x (must 0x12340078)\n", result1);
+		printf("masked values is : 0x%08x \n", result2);
 		__BKPT(0);
 	}
 #endif
