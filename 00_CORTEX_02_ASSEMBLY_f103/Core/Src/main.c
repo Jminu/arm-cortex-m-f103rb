@@ -234,13 +234,13 @@ int main(void)
 	printf("ex6. MEMCPY_SINGLE\n");
 
 	printf("\nmemory address @0x%08x filled with [0x%08x]\n", src, v);
-	mem32set((char*)src, v, size+4);
-	mem32set((char*)dst, 0x00000000, size+4);
+	mem32set((char*)src, v, size+4); // write 80bytes
+	mem32set((char*)dst, 0x00000000, size+4); // write 80bytes
 	dump_m((uint32_t*)src); // print the buffer contents to the screen
 
 	printf("\nsingle copy from @0x%08x to @0x%08x\n",src, dst);
 	//MEMCPY_SINGLE(dst, src, size);
-	memcpy((void*)dst, (void*)src, size*4); // word copy
+	memcpy((void*)dst, (void*)src, size*4); // write 64bytes
 	dump_m((uint32_t*)dst); // print the buffer contents to the screen
 	__BKPT(0);
 #endif
