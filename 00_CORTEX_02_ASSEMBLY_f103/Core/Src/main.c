@@ -206,7 +206,7 @@ int main(void)
 	}
 #endif
 
-#if 1
+#if 0
 	/* Sum from 1 to 100 */
 {
 	int start=1, end=100;
@@ -220,7 +220,7 @@ int main(void)
 }
 #endif
 
-#if 0
+#if 1
 /* Memory Copy */
 {
 	unsigned int src=0x20004000;
@@ -228,7 +228,7 @@ int main(void)
 	int size = 16; /* word size */
 	unsigned int v;
 
-#if 0
+#if 1
 	/* memory copy by LDR/STR */
 	v = 0x12345678;
 	printf("ex6. MEMCPY_SINGLE\n");
@@ -239,13 +239,13 @@ int main(void)
 	dump_m((uint32_t*)src); // print the buffer contents to the screen
 
 	printf("\nsingle copy from @0x%08x to @0x%08x\n",src, dst);
-	MEMCPY_SINGLE(dst, src, size);
-	//memcpy((void*)dst, (void*)src, size*4); // word copy
+	//MEMCPY_SINGLE(dst, src, size);
+	memcpy((void*)dst, (void*)src, size*4); // word copy
 	dump_m((uint32_t*)dst); // print the buffer contents to the screen
 	__BKPT(0);
 #endif
 
-#if 1
+#if 0
 	/* memory copy test with multiple LDM/STM */
 	v = 0x12345678;
 	printf("ex7. MEMCPY_BLOCK\n");

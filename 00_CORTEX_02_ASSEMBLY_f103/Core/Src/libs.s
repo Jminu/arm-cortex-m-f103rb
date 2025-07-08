@@ -169,6 +169,22 @@ loop2:
 	 	------------------------
 			r0=dst, r1=src, r2=size
 		*/
+	.global MEMCPY_SINGLE_PRAC
+MEMCPY_SINGLE_PRAC: @ r0=dst, r1=src, r2=size:16
+	push {lr}
+
+	lsl r2, #2 @ r2=size: 64 -> 왼쪽으로 2번 쉬프트했기 때문에,
+loop2:
+	ldrb r3, [r1], #1 @ r3에 r1이 가리키는 주소에 저장된 값을 load하고, r1을 word만큼 증가 -> 읽고, 포인터 증가하고
+	strb r3, [r0], #1 @ r0이 가리키는 주소에 r3값을 str하고, r0을 word만큼 증가 -> 쓰고, 포인터 증가하고
+	sub r2, #1 @ 16번 반복할거임, 계속 1씩 빼간
+	cmp r2, #0 @ 0하고 비교
+	bgt loop2 @ 반복할게 남았다면, loop2로 복귀
+
+	pop {pc}
+
+
+
 	.global  MEMCPY_BLOCK
 MEMCPY_BLOCK:
 	push {r4-r6,lr} 	 @ push
