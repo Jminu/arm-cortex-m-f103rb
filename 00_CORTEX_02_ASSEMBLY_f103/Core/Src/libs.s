@@ -175,26 +175,26 @@ loop2:
 	.global MEMCPY_4BYTE_PRAC
 MEMCPY_4BTYE_PRAC: @ r0=dst, r1=src, r2=size:16
 	push {lr}
-loop2:
+loop3:
 	ldr r3, [r1], #4 @ 4byte씩 더해가니까 1word만큼 이동시키는 것을 알 수 있음
 	str r3, [r0], #4
 	sub r2, #1
 	cmp r2, #0
-	bgt loop2
-
+	bgt loop3
+	pop {pc}
 
 
 	.global MEMCPY_SINGLE_PRAC
 MEMCPY_SINGLE_PRAC: @ r0=dst, r1=src, r2=size:16
 	push {lr}
 	lsl r2, #2 @ word단위를 byte단위로 환산하기 위함: 곱하기4 해야함
-loop2:
+loop4:
 	ldrb r3, [r1], #1
 	strb r3, [r0], #1
 	sub r2, #1
 	cmp r2, #0
-	bgt loop2
-
+	bgt loop4
+	pop {pc}
 
 
 	.global  MEMCPY_BLOCK
@@ -204,12 +204,12 @@ MEMCPY_BLOCK:
 	@ Make a copy in units of 4 words
 	@ use LDMIA, STMIA, SUB and CBZ instruction: under 10 lines
 
-loop3:
+loop5:
 	cbz r2,_exit_MEMCPY_BLOCK
 	ldmia r1!,{r3-r5,r6}
 	stmia r0!,{r3-r5,r6}
 	sub r2,#4
-	b loop3
+	b loop5
 _exit_MEMCPY_BLOCK:
 	pop {r4-r6,pc}	 @ pop
 
@@ -218,6 +218,21 @@ _exit_MEMCPY_BLOCK:
 	 	------------------------
 			r0=a
 		*/
+
+
+	.global MEMCPY_BLOCK_PRAC
+MEMCPY_BLOCK_PRAC: @ r0=dst, r1=src, r2=size
+	push {r4-r6, lr}
+loop6:
+	ldmia r1!, {r3-r6} @ r1에서 읽어와서 레지스터 3,4,5,6에 저장
+	stmia r0!, {r3-r6} @ 레지스터 3,4,5,6의 값들을 주소 r0부터 저장
+	sub r2, #4 @ 루프한번에 4word씩 돈다. why? r3 r4 r5 r6이렇게 read/write하니까
+	cmp r2, #0
+	bgt loop6
+
+	pop {r4-r6, pc}
+
+
 	.global  __bswap_32_asm
 __bswap_32_asm:
 	push {lr} 	 @ push

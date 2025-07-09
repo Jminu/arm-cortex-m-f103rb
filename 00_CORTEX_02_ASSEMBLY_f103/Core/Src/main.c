@@ -228,7 +228,7 @@ int main(void)
 	int size = 16; /* word size */
 	unsigned int v;
 
-#if 1
+#if 0
 	/* memory copy by LDR/STR */
 	v = 0x12345678;
 	printf("ex6. MEMCPY_SINGLE\n");
@@ -245,7 +245,7 @@ int main(void)
 	__BKPT(0);
 #endif
 
-#if 0
+#if 1
 	/* memory copy test with multiple LDM/STM */
 	v = 0x12345678;
 	printf("ex7. MEMCPY_BLOCK\n");
@@ -255,7 +255,7 @@ int main(void)
 	mem32set((char*)dst, 0x00000000, size+4);
 	dump_m((uint32_t*)src); // print the buffer contents to the screen
 	printf("\nblock copy from @0x%08x to @0x%08x\n",src, dst);
-	MEMCPY_BLOCK(dst, src, size);
+	MEMCPY_BLOCK_PRAC(dst, src, size);
 	dump_m((uint32_t*)dst); // print the buffer contents to the screen
 	__BKPT(0);
 #endif
