@@ -220,7 +220,7 @@ int main(void)
 }
 #endif
 
-#if 1
+#if 0
 /* Memory Copy */
 {
 	unsigned int src=0x20004000;
@@ -245,7 +245,7 @@ int main(void)
 	__BKPT(0);
 #endif
 
-#if 1
+#if 0
 	/* memory copy test with multiple LDM/STM */
 	v = 0x12345678;
 	printf("ex7. MEMCPY_BLOCK\n");

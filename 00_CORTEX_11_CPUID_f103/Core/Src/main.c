@@ -111,7 +111,7 @@ int main(void)
 
   /* Let's read CPUID(Memory mapped I/O Hardware Register) */
   /* source: page 224 of pm0214-stm32-cortexm4-mcus-and-mpus-programming-manual-stmicroelectronics.pdf */
-  volatile unsigned int* HWRegCPUID = (unsigned int*)0xE000ED00;
+  volatile unsigned int* HWRegCPUID = (unsigned int*)0xE000ED00; // 메모리 - 레지스터 맵핑
   printf("CPUID = 0x%08x\n", *HWRegCPUID);
 
   /* USER CODE END 2 */

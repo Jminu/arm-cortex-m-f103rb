@@ -46,7 +46,7 @@ lbl01:
 lbl03:
 	b _exit1
 	nop
-	.space 2100000
+	.space 100000 @ 10byte 공간 확보
 lbl02:
 	b lbl03
 	nop
@@ -168,7 +168,7 @@ _exit1:
 	@ Subtract
 	mov r0, #1
 	mov r1, #2
-	subs r0, r1	@ 0xffffffff
+	subs r0, r1	@ 0xffffffff 우항에서 좌황을 뺀다
 	printf_svc0
 
 	@ Reverse Subtract
@@ -200,6 +200,7 @@ _exit1:
 /*
  * Branch instructions
  */
+ 개
 	adr r0, function1+1 @ PC's lsb is always '1'
 	blx r0 @ Branch with link and exchange (Call) to a address stored in R0
 	printf_svc0
@@ -333,12 +334,12 @@ _exit1:
 /*
  * Packing and unpacking instructions
  */
- 	@ Signed Extend Byte
+ 	@ Signed Extend Byte 바이트 확장(부호있음)
 	ldr r1, =0x1234abcd
 	sxtb r0,r1
 	printf_svc0
 
-	@ Unsigned Extend Byte
+	@ Unsigned Extend Byte 바이트 확장(부호없음)
 	ldr r1, =0x1234abcd
 	uxtb r0,r1
 	printf_svc0
@@ -470,7 +471,7 @@ _exit1:
 	mrs r1, primask @ get primask
 #endif
 
-#if 1
+#if 0
 /*
  * Load and store instructions
  */
