@@ -134,7 +134,7 @@ int main(void)
   // AAPCS(Procedure Call Standard for ARM Architecture)
 	// r0,r1,r2,r3 : scratch(temporary) register
   // r0 : return value
-#if 0
+#if 1
 	{
   	/* ex1. call assembly function */
   	printf("result=%d\n", FIRST_ASM_FUNC(7,8,9,10,11,12));

@@ -205,20 +205,7 @@ void SysTick_Handler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-	HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-	printf("\nButton pushed!!! by hardware trigger\n");
-
-	printf("NVIC->IABR[%d]=0x%08x\n", 40, (unsigned)NVIC->IABR[1]);
-	printf("NVIC->ISER[%d]=0x%08x\n", 40, (unsigned)NVIC->ISER[1]);
-
-  if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin))
-  {
-  	printf("HIGH level\n");
-  	__BKPT(0);
-  }else{
-  	printf("LOW level\n");
-  	__BKPT(0);
-  }
+  HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
 
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(B1_Pin);
