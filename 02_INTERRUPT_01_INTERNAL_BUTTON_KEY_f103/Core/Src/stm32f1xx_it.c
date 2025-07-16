@@ -207,6 +207,7 @@ void EXTI15_10_IRQHandler(void)
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
   HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
   printf("button pushed!!\n");
+  printf("NVIC->IABR[%d]=0x%08x\n", 6, (unsigned)NVIC->IABR[1]); // 활성화된 인터럽트를 나타낸다
 
 
   /* USER CODE END EXTI15_10_IRQn 0 */
