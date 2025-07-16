@@ -206,6 +206,8 @@ void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
   HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+  printf("button pushed!!\n");
+
 
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(B1_Pin);

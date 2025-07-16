@@ -59,7 +59,7 @@ defined in linker script */
   .section .text.Reset_Handler
   .weak Reset_Handler
   .type Reset_Handler, %function
-Reset_Handler:
+Reset_Handler: // 부팅이후로 처음으로 실행되는 코드
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
@@ -126,6 +126,9 @@ Infinite_Loop:
   .size g_pfnVectors, .-g_pfnVectors
 
 
+/*
+	M3 벡터 테이블
+*/
 g_pfnVectors:
 
   .word _estack
@@ -150,11 +153,17 @@ g_pfnVectors:
   .word RTC_IRQHandler
   .word FLASH_IRQHandler
   .word RCC_IRQHandler
-  .word EXTI0_IRQHandler
+
+  /*
+  	외부 인터럽트 0번~4번의 ISR 주소를 넣는다.
+  */
+  .word EXTI0_IRQHandler // : 외부 인터럽트 0번이 발생했을때, 실행될 핸들러함수의 주소를 넣는다!
   .word EXTI1_IRQHandler
   .word EXTI2_IRQHandler
   .word EXTI3_IRQHandler
   .word EXTI4_IRQHandler
+
+
   .word DMA1_Channel1_IRQHandler
   .word DMA1_Channel2_IRQHandler
   .word DMA1_Channel3_IRQHandler
@@ -167,7 +176,9 @@ g_pfnVectors:
   .word USB_LP_CAN1_RX0_IRQHandler
   .word CAN1_RX1_IRQHandler
   .word CAN1_SCE_IRQHandler
-  .word EXTI9_5_IRQHandler
+
+  .word EXTI9_5_IRQHandler // 5부터 9까지 묶어서 처리: 5번~9번의 ISR 주소를 넣는다
+
   .word TIM1_BRK_IRQHandler
   .word TIM1_UP_IRQHandler
   .word TIM1_TRG_COM_IRQHandler
@@ -184,7 +195,9 @@ g_pfnVectors:
   .word USART1_IRQHandler
   .word USART2_IRQHandler
   .word USART3_IRQHandler
-  .word EXTI15_10_IRQHandler
+
+  .word EXTI15_10_IRQHandler // 10부터 15까지 묶어서 처리
+
   .word RTC_Alarm_IRQHandler
   .word USBWakeUp_IRQHandler
   .word 0

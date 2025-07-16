@@ -121,9 +121,9 @@ int main(void)
   {
     if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin))
     {
-    	printf("HIGH level\n");
+    	// printf("HIGH level\n");
     }else{
-    	printf("LOW level\n");
+    	// printf("LOW level\n");
     }
 
   	// B1 button key interrupt by software trigger
