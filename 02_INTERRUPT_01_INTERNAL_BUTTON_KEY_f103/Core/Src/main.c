@@ -135,7 +135,7 @@ int main(void)
   	}
 
   	// B1 button key interrupt by set pend register
-  	if (0)
+  	if (1)
   	{
 			unsigned long* NVIC_ISPR= (unsigned long*)0xE000E204;
 			*NVIC_ISPR= 0x100;
